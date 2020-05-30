@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    options {disableConcurrentBuilds()}
+    stages{
+        stage('clean workspaces') { 
+            steps {
+              cleanWs()
+            }                 
+        }
+        
+        stage("git clone"){
+            steps {
+                cleanWs()
+                    checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/master']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [[$class: 'CleanCheckout']], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [
+                        [url: 'git@github.com:agustinjaume/jenkins-terraform.git', credentialsId: '']
+                        ]])
+                sh 'pwd' 
+                sh 'ls -l'
+            }
+        }
+    
+        stage('Terraform init') {
+         steps {
+         sh 'terraform --version'
+         sh 'pwd'
+         sh ' cd bastion && ls -la'
+         sh ' cd bastion && terraform init'
+         sh ' cd bastion && ls -la'
+         }
+      }
+   }
+}
