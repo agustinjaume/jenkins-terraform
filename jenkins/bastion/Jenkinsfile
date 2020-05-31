@@ -1,13 +1,13 @@
 pipeline {
     agent any
     environment {
-        GOOGLE_PROJECT_ID = "Proyecto-ideas-extraordinarias"  //${OAUTH_IT_PROJECT_ID}"
+        GOOGLE_PROJECT_ID = "Proyecto-ideas-extraordinarias" 
         GOOGLE_APPLICATION_CREDENTIALS = credentials('service-account-jenkins')
     }
     
     stages{
         
-        stage('clean workspaces') { 
+        stage('clean workspaces -------------------------------') { 
             steps {
               cleanWs()
               sh 'env'
@@ -15,7 +15,7 @@ pipeline {
         }  //stage
 
         
-        stage("git clone"){
+        stage("git clone --------------------------------------"){
             steps {
                 cleanWs()
                     checkout([$class: 'GitSCM', 
@@ -31,17 +31,30 @@ pipeline {
             } //steps
         }  //stage
     
-
-
-        stage('Terraform init') {
+        stage('Terraform init---------------------------') {
          steps {
-         sh 'terraform --version'
-         sh  'env'
-         sh 'pwd'
-         sh ' cd bastion && gcloud projects list'
-         sh ' cd bastion && terraform init'
-         sh ' cd bastion && ls -la'
+            sh 'terraform --version'
+            sh 'env'
+            sh 'pwd'
+            sh ' cd bastion && ls -la'
+            sh ' cd bastion && gcloud projects list'
+            sh ' cd bastion && terraform init -var-file="../variables/dev.tfvars"'
             } //steps
         }  //stage
-   }
-}
+
+        stage('Terraform plan-------------------------') {
+            steps {
+               sh 'cd bastion && ls -la'
+               sh 'cd bastion && gcloud projects list'
+               sh 'cd bastion &&terraform plan -var-file="../variables/dev.tfvars" -out="../variables/terraform-dev.tfplan" -lock=false'
+            } //steps
+        }  //stage
+
+        stage('Terraform apply--------------------') {
+            steps {
+               sh 'cd bastion && ls -la'
+               sh 'cd bastion && terraform apply "../variables/terraform-dev.tfplan" -auto-approve -refresh=true'
+            } //steps
+        }  //stage
+   }  // stages
+} //pipeline
