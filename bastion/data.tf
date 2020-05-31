@@ -1,7 +1,7 @@
 provider "google" {
   #credentials = "${file("${path.module}/../../credentials/account.json")}"
-  project     = "${var.gcp_project_id}"
-  region      = "${var.gcp_zone}"
+  project     = var.gcp_project_id
+  region      = var.gcp_zone
 }
 
 data "google_compute_network" "vpc" {
