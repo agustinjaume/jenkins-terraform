@@ -7,7 +7,7 @@ pipeline {
     
     stages{
         
-        stage('clean workspaces -------------------------------') { 
+        stage('clean workspaces -----------') { 
             steps {
               cleanWs()
               sh 'env'
@@ -15,7 +15,7 @@ pipeline {
         }  //stage
 
         
-        stage("git clone --------------------------------------"){
+        stage("git clone -----------------"){
             steps {
                 cleanWs()
                     checkout([$class: 'GitSCM', 
@@ -31,7 +31,7 @@ pipeline {
             } //steps
         }  //stage
     
-        stage('Terraform init---------------------------') {
+        stage('Terraform init------------------') {
          steps {
             sh 'terraform --version'
             sh 'env'
@@ -42,18 +42,18 @@ pipeline {
             } //steps
         }  //stage
 
-        stage('Terraform plan-------------------------') {
+        stage('Terraform plan------------------') {
             steps {
                sh 'cd bastion && ls -la'
                sh 'cd bastion && gcloud projects list'
-               sh 'cd bastion &&terraform plan -var-file="../variables/dev.tfvars" -out="../variables/terraform-dev.tfplan" -lock=false'
+               sh 'cd bastion && terraform plan -var-file="../variables/dev.tfvars" -out="../variables/terraform-dev.tfplan" -lock=false'
             } //steps
         }  //stage
 
-        stage('Terraform apply--------------------') {
+        stage('Terraform apply----------------') {
             steps {
-               sh 'cd bastion && ls -la'
-               sh 'cd bastion && terraform apply "../variables/terraform-dev.tfplan" -auto-approve -refresh=true'
+               sh '----------------------------------------'
+               sh 'cd bastion && terraform apply -refresh=true "../variables/terraform-dev.tfplan" -auto-approve '
             } //steps
         }  //stage
    }  // stages
