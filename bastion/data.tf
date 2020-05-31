@@ -13,8 +13,8 @@ data "google_compute_network" "vpc" {
 
 
 data "google_compute_subnetwork" "subnet-1" {
-  name   = "${var.gcp_subnet_1}"  #"subnet-0dc434d42bbf529a-ust-des"
-  region = "${var.gcp_zone}"  #"europe-west3" 
+  name   = "${var.gcp_subnet_1}"  
+  region = "${var.gcp_zone}" 
 }
 
 data "google_compute_zones" "available" {

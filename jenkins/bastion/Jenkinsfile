@@ -1,12 +1,19 @@
 pipeline {
     agent any
-    options {disableConcurrentBuilds()}
+    environment {
+        GOOGLE_PROJECT_ID = "Proyecto-ideas-extraordinarias"  //${OAUTH_IT_PROJECT_ID}"
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('service-account-jenkins')
+    }
+    
     stages{
+        
         stage('clean workspaces') { 
             steps {
               cleanWs()
-            }                 
-        }
+              sh 'env'
+            } //steps
+        }  //stage
+
         
         stage("git clone"){
             steps {
@@ -21,17 +28,20 @@ pipeline {
                         ]])
                 sh 'pwd' 
                 sh 'ls -l'
-            }
-        }
+            } //steps
+        }  //stage
     
+
+
         stage('Terraform init') {
          steps {
          sh 'terraform --version'
+         sh  'env'
          sh 'pwd'
-         sh ' cd bastion && ls -la'
+         sh ' cd bastion && gcloud projects list'
          sh ' cd bastion && terraform init'
          sh ' cd bastion && ls -la'
-         }
-      }
+            } //steps
+        }  //stage
    }
 }

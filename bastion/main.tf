@@ -1,12 +1,6 @@
-# data "google_client_config" "current" {}
-
-
 resource "google_compute_address" "static" {
   name = "ip-external-ideasextraordinarias"
 }
-
-
-
 
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
@@ -16,11 +10,11 @@ resource "google_compute_instance" "bastion_instance" {
     "${var.environment}-bastion-http",
     "${var.environment}-bastion-ssh"
      ]
-  project      =  "${var.gcp_project_id}"
+  project      =  var.gcp_project_id
   description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
   network_interface { 
-    subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"  # "subnet-0dc434d42bbf529a-ust-des"  
-    subnetwork_project ="${var.gcp_project_id}" # "vpc-ust-des" 
+    subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
+    subnetwork_project = var.gcp_project_id 
     access_config {
       nat_ip = google_compute_address.static.address
     }
