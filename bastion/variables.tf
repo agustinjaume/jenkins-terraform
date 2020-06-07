@@ -25,5 +25,3 @@ variable "ssh_user" {
 variable "ssh_pub_key_file" {
 }
 
-# variable "network" {
-# }
