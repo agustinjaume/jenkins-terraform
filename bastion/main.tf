@@ -1,10 +1,10 @@
 resource "google_compute_address" "static" {
-  name = "GHDZ-Grupo-BigData-POC"
+  name = "ip-external-ideasextraordinarias"
 }
 
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   zone         =  "us-central1-a"  
   tags = [
     "${var.environment}-bastion-http",
