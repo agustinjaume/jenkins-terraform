@@ -13,14 +13,14 @@ gcp_subnet_1 = "subnet-vpc-des"
 gcp_region = "us-central1"
 gcp_project_id = "ghdz-grupo-bigdata-poc"
 client = "ideasextraordinarias"
-gcp_vpc_cidr = "10.150.0.0/20"
+# gcp_vpc_cidr = "10.150.0.0/20"
 gcp_zone = "us-central1-a"
-zones = ["us-central1-a","us-central1-b","us-central1-c"]
+# zones = ["us-central1-a","us-central1-b","us-central1-c"]
 
 
 # vm - BASTION ---------------------------
-cidr_blocks = "0.0.0.0/0"
-machine_type = "e2.micro" 
+# cidr_blocks = "0.0.0.0/0"
+# machine_type = "e2.micro" 
 #metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y && echo '<!doctype html><html><body><h1>Hello from Terraform on Google Cloud!</h1></body></html>' | sudo tee /var/www/html/index.html"
 metadata_startup_script = "scripts/bootstrap.sh"
 
