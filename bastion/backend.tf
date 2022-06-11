@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket          = "tfstate-bucket-4291-ideasextraordinarias-default"
+    bucket          = "ghdz-grupo-bigdata-poc-tfstate"
     prefix          = "bastion/terraform.tfstate"
 
   }
