@@ -1,5 +1,5 @@
 resource "google_compute_address" "static" {
-  name = "ip-external-ideasextraordinarias"
+  name = "GHDZ-Grupo-BigData-POC"
 }
 
 resource "google_compute_instance" "bastion_instance" {
