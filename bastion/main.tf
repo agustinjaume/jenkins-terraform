@@ -5,7 +5,7 @@ resource "google_compute_address" "static" {
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
   machine_type = "e2-micro"
-  zone         =  "us-central1"  
+  zone         = "us-central1-a"  
   tags = [
     "${var.environment}-bastion-http",
     "${var.environment}-bastion-ssh"
