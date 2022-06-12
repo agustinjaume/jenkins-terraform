@@ -8,8 +8,8 @@
 
 
 environment = "dev"
-gcp_vpc_name = "vpc-des"
-gcp_subnet_1 = "subnet-vpc-des"
+gcp_vpc_name = "default"
+gcp_subnet_1 = "default"
 gcp_region = "us-central1"
 gcp_project_id = "ghdz-grupo-bigdata-poc"
 client = "ideasextraordinarias"
