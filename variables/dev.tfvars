@@ -14,8 +14,8 @@ gcp_region = "us-central1"
 gcp_project_id = "ghdz-grupo-bigdata-poc"
 client = "ideasextraordinarias"
 # gcp_vpc_cidr = "10.150.0.0/20"
-gcp_zone = "us-central1-a"
-# zones = ["us-central1-a","us-central1-b","us-central1-c"]
+gcp_zone = "us-central1"
+zones = ["us-central1-a","us-central1-b","us-central1-c"]
 
 
 # vm - BASTION ---------------------------
