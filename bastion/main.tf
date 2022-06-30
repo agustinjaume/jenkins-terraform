@@ -1,18 +1,19 @@
 resource "google_compute_address" "static" {
-  name = "ip-external-ideasextraordinarias"
+  name = "ipv4-address"
 }
 
 resource "google_compute_instance" "bastion_instance" {
   name         = "bastion-${var.client}-${var.environment}"
-  machine_type = "f1-micro"
-  zone         =  "europe-west3-a"  
+  machine_type = "e2-micro"
+  zone         = "us-central1-a"  
   tags = [
     "${var.environment}-bastion-http",
     "${var.environment}-bastion-ssh"
      ]
   project      =  var.gcp_project_id
   description   = "${var.client}-${var.environment}-${data.google_compute_subnetwork.subnet-1.ip_cidr_range}"
-  network_interface { 
+  network_interface {
+    network = "${var.gcp_vpc_name}"
     subnetwork = "${data.google_compute_subnetwork.subnet-1.name}"   
     subnetwork_project = var.gcp_project_id 
     access_config {
